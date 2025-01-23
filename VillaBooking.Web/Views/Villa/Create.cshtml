@@ -1,0 +1,53 @@
+﻿@model Villa
+
+<h1>Create	Villa</h1>
+<div class="container">
+	<form method="post" class=" row p-3 ">
+		@* <div asp-validation-summary="All">
+		</div> *@
+		<div class="mb-2">
+			<label asp-for="Name"></label>
+			<input asp-for="Name" class="form-control border shadow" />
+			<span asp-validation-for="Name" class="text-danger"></span>
+		</div>
+		<div class="mb-2">
+			<label asp-for="Price"></label>
+			<input asp-for="Price" class="form-control border shadow" />
+			<span asp-validation-for="Price" class="text-danger"></span>
+
+		</div>
+		<div class="mb-2">
+			<label asp-for="Description"></label>
+			<input asp-for="Description" class="form-control border shadow" />
+			<span asp-validation-for="Description" class="text-danger"></span>
+
+		</div>
+		<div class="mb-2">
+			<label asp-for="Occupancy"></label>
+			<input asp-for="Occupancy" class="form-control border shadow" />
+			<span asp-validation-for="Occupancy" class="text-danger"></span>
+
+		</div>
+		<div class="mb-2">
+			<label asp-for="Sqft"></label>
+			<input asp-for="Sqft" class="form-control border shadow" />
+			<span asp-validation-for="Sqft" class="text-danger"></span>
+		</div>
+		<div class="mb-2">
+			<label asp-for="ImageUrl"></label>
+			<input asp-for="ImageUrl" class="form-control border shadow" />
+			<span asp-validation-for="ImageUrl" class="text-danger"></span>
+		</div>
+		<div class="row mt-2">
+			<div class="col-3 d-flex ">
+				<button type="submit" class="btn btn-success me-2 ">Add</button>
+				<a asp-controller="Villa" asp-action="Index" class="btn btn-primary">Cancel</a>
+			</div>
+		</div>
+	</form>
+</div>
+
+@section Scripts
+{
+	<partial name="_ValidationScriptsPartial">
+}

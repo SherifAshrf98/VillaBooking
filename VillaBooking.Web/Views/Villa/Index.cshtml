@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Villa>
+
+<h1>Villas List</h1>
+<div class="container">
+	<div class="row my-4 ">
+		<div class="col d-flex justify-content-end">
+			<a asp-controller="Villa" asp-action="Create" class="btn btn-primary">
+				<i class="bi bi-plus-circle"></i> Create New Villa
+			</a>
+		</div>
+	</div>
+
+	<div class="row">
+		@foreach (var villa in Model)
+		{
+			<div class="col-lg-4 col-md-6 mb-4">
+				<div class="card ">
+					<img src="@villa.ImageUrl" class="card-img-top" alt="@villa.Name">
+					<div class="card-body">
+						<h5 class="card-title">@villa.Name</h5>
+						<p class="card-text">@villa.Description</p>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item"><strong>Price:</strong> $@villa.Price</li>
+							<li class="list-group-item"><strong>Square Feet:</strong> @villa.Sqft sqft</li>
+							<li class="list-group-item"><strong>Occupancy:</strong> @villa.Occupancy</li>
+							<li class="list-group-item"><strong>Created:</strong> @villa.CreatedDate?.ToShortDateString()</li>
+							<li class="list-group-item"><strong>Updated:</strong> @villa.UpdatedDate?.ToShortDateString()</li>
+						</ul>
+						<div class="card-footer">
+							<a href="/Villas/Edit/@villa.Id" class="btn btn-warning">
+								<i class="bi bi-pencil"></i> Edit
+							</a>
+							<a href="/Villas/Delete/@villa.Id" class="btn btn-danger">
+								<i class="bi bi-trash"></i> Delete
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>

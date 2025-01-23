@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using VillaBooking.Infrastructure.Data;
+
 namespace VillaBooking.Web
 {
 	public class Program
@@ -8,6 +11,9 @@ namespace VillaBooking.Web
 
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
+
+			var ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+			builder.Services.AddDbContext<AppDbContext>(optionsbuilder => optionsbuilder.UseSqlServer(ConnectionString));
 
 			var app = builder.Build();
 
@@ -20,6 +26,7 @@ namespace VillaBooking.Web
 			}
 
 			app.UseHttpsRedirection();
+
 			app.UseStaticFiles();
 
 			app.UseRouting();
@@ -29,7 +36,6 @@ namespace VillaBooking.Web
 			app.MapControllerRoute(
 				name: "default",
 				pattern: "{controller=Home}/{action=Index}/{id?}");
-
 			app.Run();
 		}
 	}
