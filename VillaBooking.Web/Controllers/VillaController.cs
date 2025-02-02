@@ -36,5 +36,60 @@ namespace VillaBooking.Web.Controllers
 			}
 			return View(villa);
 		}
+
+		public IActionResult Edit(int id)
+		{
+			Villa? villa = _dbContext.Villas.Find(id);
+
+			if (villa is null)
+			{
+				return RedirectToAction("Error", "Home");
+
+			}
+			return View(villa);
+		}
+
+		[HttpPost]
+		public IActionResult Edit(Villa villa)
+		{
+			if (ModelState.IsValid && villa.Id > 0)
+			{
+				_dbContext.Update(villa);
+
+				_dbContext.SaveChanges();
+
+				return RedirectToAction("Index");
+			}
+			return View();
+		}
+
+		public IActionResult Delete(int id)
+		{
+			Villa? villa = _dbContext.Villas.Find(id);
+
+			if (villa is null)
+			{
+				return RedirectToAction("Error", "Home");
+			}
+
+			return View(villa);
+		}
+
+		[HttpPost]
+		public IActionResult Delete(Villa villa)
+		{
+			Villa? ObjFromDb = _dbContext.Villas.FirstOrDefault(v => v.Id == villa.Id);
+
+			if (ObjFromDb is not null)
+			{
+				_dbContext.Remove(ObjFromDb);
+				_dbContext.SaveChanges();
+				return RedirectToAction("Index");
+			}
+
+			ModelState.AddModelError("", "Can't Delete this villa please try again");
+
+			return View(villa);
+		}
 	}
 }
